@@ -4,6 +4,7 @@
 }
 
 @model List<Books>
+@Html.ActionLink("Create", "Edit", "Book", new { id = 0 }, null)
 
 <table class="table table-stripped">
     <thead class="thead-dark">
@@ -18,10 +19,11 @@
         @foreach (var item in Model)
             {
             <tr>
-                <th scope="row">@item.AuthorId</th>
-                <th scope="row">@item.Title</th>
-                <th scope="row">@item.Pages</th>
-                <th scope="row">@item.Price</th>
+                <td scope="row">@item.AuthorId</td>
+                <td scope="row">@item.Title</td>
+                <td scope="row">@item.Pages</td>
+                <td scope="row">@item.Price</td>
+                <td scope="row">@Html.ActionLink("Edit book", "Edit", "Book", new { id = @item.Id }, null)</td>
             </tr>
         }
     </tbody>
