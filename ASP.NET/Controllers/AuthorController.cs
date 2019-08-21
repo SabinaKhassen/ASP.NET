@@ -19,22 +19,6 @@ namespace ASP.NET.Controllers
             return View(authors);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(Authors author)
-        {
-            using (Model1 db = new Model1())
-            {
-                db.Authors.Add(author);
-                db.SaveChanges();
-            }
-            return Redirect("Index");
-        }
-
         public ActionResult Edit(int id)
         {
             Authors author;
