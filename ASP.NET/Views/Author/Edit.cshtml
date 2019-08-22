@@ -1,4 +1,5 @@
-﻿@model ASP.NET.Authors
+﻿@using ASP.NET.Helpers
+@model ASP.NET.Authors
 
 @{
     ViewBag.Title = "Edit";
@@ -19,7 +20,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.Custom_Editor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>

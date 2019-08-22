@@ -8,10 +8,14 @@
 @model List<Books>
 @Html.ActionLink("Create", "Edit", "Book", new { id = 0 }, null)
 
+@{ 
+    List<Authors> authors = ViewBag.Authors;
+}
+
 <table class="table table-stripped">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">Author ID</th>
+            <th scope="col">Author</th>
             <th scope="col">Title</th>
             <th scope="col">Pages</th>
             <th scope="col">Price</th>
@@ -19,9 +23,10 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-            {
+        {
+            string nameAuthor = @authors.Where(a => a.Id == item.AuthorId).FirstOrDefault().FirstName + " " + @authors.Where(a => a.Id == item.AuthorId).FirstOrDefault().LastName;
             <tr>
-                <td scope="row">@item.AuthorId</td>
+                <td scope="row">@nameAuthor</td>
                 <td scope="row">@item.Title</td>
                 <td scope="row">@item.Pages</td>
                 <td scope="row">@item.Price</td>

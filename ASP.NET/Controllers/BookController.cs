@@ -15,6 +15,7 @@ namespace ASP.NET.Controllers
             using (Model1 db = new Model1())
             {
                 books = db.Books.ToList();
+                ViewBag.Authors = db.Authors.ToList();
             }
             return View(books);
         }
@@ -26,7 +27,10 @@ namespace ASP.NET.Controllers
             {
                 ViewBag.Message = "Edit";
                 using (Model1 db = new Model1())
+                {
                     books = db.Books.Where(b => b.Id == id).FirstOrDefault();
+                    ViewBag.Authors = new SelectList(db.Authors.ToList(), "Id", "Title");
+                }
             }
             else
             {
