@@ -26,6 +26,7 @@
                 <td scope="row">@item.Pages</td>
                 <td scope="row">@item.Price</td>
                 <td scope="row">@Html.ActionLink("Edit book", "Edit", "Book", new { id = @item.Id }, null)</td>
+                <td scope="row">@Html.ActionLink("Delete book", "Delete", "Book", new { id = @item.Id }, null)</td>
             </tr>
         }
     </tbody>

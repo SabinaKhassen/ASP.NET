@@ -57,5 +57,17 @@ namespace ASP.NET.Controllers
             }
             return RedirectToActionPermanent("Index", "Book");
         }
+
+        public ActionResult Delete(int id)
+        {
+            Books book;
+            using (Model1 db = new Model1())
+            {
+                book = db.Books.Where(b => b.Id == id).FirstOrDefault();
+                db.Books.Remove(book);
+                db.SaveChanges();
+            }
+            return RedirectToActionPermanent("Index", "Book");
+        }
     }
 }
