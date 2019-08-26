@@ -1,0 +1,38 @@
+﻿@model List<UserBookLinks>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users' orders</h2>
+
+@Html.ActionLink("Create", "Edit", "UserBookLink", new { id = 0 }, null)
+@{
+    List<Books> books = ViewBag.Books;
+    List<Users> users = ViewBag.Users;
+}
+
+<table class="table table-stripped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">Book</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string user = @users.Where(u => u.Id == item.UserId).Select(u => u.FIO).FirstOrDefault();
+            Books book = @books.Where(b => b.Id == item.BookId).FirstOrDefault();
+            <tr>
+                <td scope="row">@user</td>
+                <td scope="row">@book.Title</td>
+                <td scope="row">@book.Pages</td>
+                <td scope="row">@book.Price</td>
+                <td scope="row">@Html.ActionLink("Edit order", "Edit", "UserBookLink", new { id = @item.Id }, null)</td>
+                <td scope="row">@Html.ActionLink("Delete order", "Delete", "UserBookLink", new { id = @item.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table> 

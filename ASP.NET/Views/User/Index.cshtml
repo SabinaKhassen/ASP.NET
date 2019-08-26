@@ -1,0 +1,27 @@
+﻿@model List<ASP.NET.Users>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+@Html.ActionLink("Create", "Edit", "User", new { id = 0 }, null)
+
+<table class="table table-stripped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">FIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="row">@item.Id</td>
+                <td scope="row">@item.FIO</td>
+                <td scope="row">@Html.ActionLink("Edit user", "Edit", "User", new { id = @item.Id }, null)</td>
+                <td scope="row">@Html.ActionLink("Delete user", "Delete", "User", new { id = @item.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table> 
