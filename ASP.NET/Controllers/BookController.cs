@@ -29,13 +29,17 @@ namespace ASP.NET.Controllers
                 using (Model1 db = new Model1())
                 {
                     books = db.Books.Where(b => b.Id == id).FirstOrDefault();
-                    ViewBag.Authors = new SelectList(db.Authors.ToList(), "Id", "Title");
+                    ViewBag.Authors = new SelectList(db.Authors.ToList(), "Id", "LastName");
                 }
             }
             else
             {
                 ViewBag.Message = "Create";
                 books = null;
+                using (Model1 db = new Model1())
+                {
+                    ViewBag.Authors = new SelectList(db.Authors.ToList(), "Id", "LastName");
+                }
             }
 
             return View(books);

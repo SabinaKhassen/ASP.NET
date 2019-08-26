@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Edit";
-    List<Authors> authors = ViewBag.Authors;
 }
 
 <h2>@ViewBag.Message</h2>
@@ -27,7 +26,7 @@
                     }
                 </select>*@
                 @*как заполнить dropdown*@
-                @Html.DropDownListFor(model => model.Title, ViewBag.Authors as SelectList);
+                @Html.DropDownListFor(model => model.AuthorId, ViewBag.Authors as SelectList);
 
                 @*@Html.EditorFor(model => model.AuthorId, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
