@@ -12,9 +12,18 @@ namespace ASP.NET.Controllers
         public ActionResult Index()
         {
             List<Authors> authors;
+            List<Authors> authorsTop = new List<Authors>();
             using (Model1 db = new NET.Model1())
             {
                 authors = db.Authors.ToList();
+                var expensiveBooks = db.Books
+                    .OrderByDescending(b => b.Price).ToList();
+                //expensiveBooks.ForEach(x => authorsTop.Add(db.Authors.Where(a => a.Id == x).FirstOrDefault()));
+                foreach (var item in expensiveBooks)
+                {
+                    authorsTop.Add(db.Authors.Where(a => a.Id == item.AuthorId).FirstOrDefault());
+                }
+                ViewBag.AuthorsTop = authorsTop.Distinct().Take(5);
             }
             return View(authors);
         }
@@ -66,6 +75,18 @@ namespace ASP.NET.Controllers
                 db.SaveChanges();
             }
             return RedirectToActionPermanent("Index", "Author");
+        }
+
+        public ActionResult _MyPartialView()
+        {
+            using (Model1 db = new NET.Model1())
+            {
+                var expensiveBooks = db.Books
+                    .OrderByDescending(b => b.Price).ToList();
+                ViewBag.ExpBooks = expensiveBooks;
+                ViewBag.Authors = db.Authors.ToList();
+            }
+            return PartialView();
         }
     }
 }

@@ -57,9 +57,10 @@ namespace ASP.NET.Controllers
 
         public ActionResult Delete(int id)
         {
+            Users user;
             using (Model1 db = new Model1())
             {
-                Users user = db.Users.Where(u => u.Id == id).FirstOrDefault();
+                user = db.Users.Where(u => u.Id == id).FirstOrDefault();
                 db.Users.Remove(user);
                 db.SaveChanges();
             }

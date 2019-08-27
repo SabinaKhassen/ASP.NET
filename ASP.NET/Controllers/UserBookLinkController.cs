@@ -24,6 +24,7 @@ namespace ASP.NET.Controllers
         public ActionResult Edit(int id)
         {
             UserBookLinks link;
+            List<Books> books = new List<Books>();
             if (id != 0)
             {
                 ViewBag.Message = "Edit";
@@ -32,6 +33,9 @@ namespace ASP.NET.Controllers
                     link = db.UserBookLinks.Where(u => u.Id == id).FirstOrDefault();
                     ViewBag.Users = new SelectList(db.Users.ToList(), "Id", "FIO");
                     ViewBag.Books = new SelectList(db.Books.ToList(), "Id", "Title");
+                    List<UserBookLinks> links = db.UserBookLinks.Where(u => u.UserId == link.UserId).ToList();
+                    links.ForEach(l => books.Add(db.Books.Where(b => b.Id == l.BookId).FirstOrDefault()));
+                    ViewBag.BookOrders = books.Distinct().Take(5);
                 }
             }
             else
@@ -57,7 +61,7 @@ namespace ASP.NET.Controllers
                     db.UserBookLinks.Add(link);
                 else
                 {
-                    lnk.UserId = link.UserId;
+                    //lnk.UserId = link.UserId;
                     lnk.BookId = link.BookId;
                 }
                 db.SaveChanges();
@@ -74,6 +78,11 @@ namespace ASP.NET.Controllers
                 db.SaveChanges();
             }
             return RedirectToActionPermanent("Index", "UserBookLink");
+        }
+
+        public ActionResult UserOrders()
+        {
+            return PartialView();
         }
     }
 }

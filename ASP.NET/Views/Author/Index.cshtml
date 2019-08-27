@@ -7,6 +7,8 @@
 @model List<Authors>
 @Html.ActionLink("Создать", "Edit", "Author", new { id = 0 }, null)
 
+@Html.Partial("Partial/_MyPartialView", @ViewBag.AuthorsTop as List<Authors>)
+
 <table class="table table-stripped">
     <thead class="thead-dark">
         <tr>

@@ -1,0 +1,21 @@
+﻿<h2>Top 5 Orders</h2>
+
+<table class="table table-stripped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @ViewBag.BookOrders)
+        {
+            <tr>
+                <td scope="row">@item.Title</td>
+                <td scope="row">@item.Pages</td>
+                <td scope="row">@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table> 

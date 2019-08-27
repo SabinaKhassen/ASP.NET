@@ -1,0 +1,21 @@
+﻿@model List<Authors>
+<h2>Top 5 authors</h2>
+
+<table class="table table-stripped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.AuthorsTop)
+        {
+            <tr>
+                <td scope="row">@item.FirstName</td>
+                <td scope="row">@item.LastName</td>
+            </tr>
+        }
+    </tbody>
+</table> 

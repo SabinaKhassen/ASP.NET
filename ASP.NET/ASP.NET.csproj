@@ -266,6 +266,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\UserBookLink\Index.cshtml" />
     <Content Include="Views\UserBookLink\Edit.cshtml" />
+    <Content Include="Views\Author\Partial\_MyPartialView.cshtml" />
+    <Content Include="Views\UserBookLink\Partial\UserOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
