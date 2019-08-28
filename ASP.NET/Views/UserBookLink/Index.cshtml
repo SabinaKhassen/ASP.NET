@@ -11,6 +11,10 @@
     List<Users> users = ViewBag.Users;
 }
 
+<div style="display:inline-block; margin-left:50px;">
+    @Html.ActionLink("Get list of deadlines", "DeadlineFile", "UserBookLink")
+</div>
+
 <table class="table table-stripped">
     <thead class="thead-dark">
         <tr>
