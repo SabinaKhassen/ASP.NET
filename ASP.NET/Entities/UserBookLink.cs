@@ -24,5 +24,14 @@ namespace ASP.NET
         public virtual int BookId { get; set; }
         [ForeignKey("BookId")]
         public virtual Books Books { get; set; }
+
+        [Required]
+        public DateTime CreationDate { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Deadline { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime? ReturnDate { get; set; } = null;
     }
 }

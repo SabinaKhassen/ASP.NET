@@ -18,10 +18,13 @@
             <th scope="col">Book</th>
             <th scope="col">Pages</th>
             <th scope="col">Price</th>
+            <th scope="col">CreationDate</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">ReturnDate</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (UserBookLinks item in Model)
         {
             string user = @users.Where(u => u.Id == item.UserId).Select(u => u.FIO).FirstOrDefault();
             Books book = @books.Where(b => b.Id == item.BookId).FirstOrDefault();
@@ -30,6 +33,16 @@
                 <td scope="row">@book.Title</td>
                 <td scope="row">@book.Pages</td>
                 <td scope="row">@book.Price</td>
+                <td scope="row">@item.CreationDate</td>
+                <td scope="row">@item.Deadline</td>
+                @if (@item.ReturnDate != @item.CreationDate)
+                {
+                    <td scope="row">@item.ReturnDate</td>
+                }
+                else
+                {
+                    <td scope="row">@Html.ActionLink("Send notification", "SendEmail", "UserBookLink", new { id = @item.Id }, null)</td>
+                }
                 <td scope="row">@Html.ActionLink("Edit order", "Edit", "UserBookLink", new { id = @item.Id }, null)</td>
                 <td scope="row">@Html.ActionLink("Delete order", "Delete", "UserBookLink", new { id = @item.Id }, null)</td>
             </tr>

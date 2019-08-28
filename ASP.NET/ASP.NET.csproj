@@ -177,6 +177,26 @@
     <Compile Include="Migrations\201908261453470_FirstMigration.Designer.cs">
       <DependentUpon>201908261453470_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908281244355_DatesLink.cs" />
+    <Compile Include="Migrations\201908281244355_DatesLink.Designer.cs">
+      <DependentUpon>201908281244355_DatesLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281245480_UserEmail.cs" />
+    <Compile Include="Migrations\201908281245480_UserEmail.Designer.cs">
+      <DependentUpon>201908281245480_UserEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281305526_ChangedDeadline.cs" />
+    <Compile Include="Migrations\201908281305526_ChangedDeadline.Designer.cs">
+      <DependentUpon>201908281305526_ChangedDeadline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281325470_NullDate.cs" />
+    <Compile Include="Migrations\201908281325470_NullDate.Designer.cs">
+      <DependentUpon>201908281325470_NullDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281414547_DateDateTime.cs" />
+    <Compile Include="Migrations\201908281414547_DateDateTime.Designer.cs">
+      <DependentUpon>201908281414547_DateDateTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,6 +303,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908261453470_FirstMigration.resx">
       <DependentUpon>201908261453470_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281244355_DatesLink.resx">
+      <DependentUpon>201908281244355_DatesLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281245480_UserEmail.resx">
+      <DependentUpon>201908281245480_UserEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281305526_ChangedDeadline.resx">
+      <DependentUpon>201908281305526_ChangedDeadline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281325470_NullDate.resx">
+      <DependentUpon>201908281325470_NullDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281414547_DateDateTime.resx">
+      <DependentUpon>201908281414547_DateDateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

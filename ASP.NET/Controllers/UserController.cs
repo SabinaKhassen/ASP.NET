@@ -47,6 +47,7 @@ namespace ASP.NET.Controllers
                 if (us != null)
                 {
                     us.FIO = user.FIO;
+                    us.Email = user.Email;
                 }
                 else
                     db.Users.Add(user);

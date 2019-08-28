@@ -11,6 +11,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">FIO</th>
+            <th scope="col">Email</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
             <tr>
                 <td scope="row">@item.Id</td>
                 <td scope="row">@item.FIO</td>
+                <td scope="row">@item.Email</td>
                 <td scope="row">@Html.ActionLink("Edit user", "Edit", "User", new { id = @item.Id }, null)</td>
                 <td scope="row">@Html.ActionLink("Delete user", "Delete", "User", new { id = @item.Id }, null)</td>
             </tr>
