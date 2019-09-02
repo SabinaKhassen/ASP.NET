@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
+using System.Reflection;
 
 namespace ASP.NET.Controllers
 {
@@ -121,42 +122,44 @@ namespace ASP.NET.Controllers
 
         public ActionResult DeadlineFile()
         {
+            List<UserBookLinks> deadlines = new List<UserBookLinks>();
             using (Model1 db = new Model1())
             {
                 var links = db.UserBookLinks.Where(u => u.CreationDate == u.ReturnDate).ToList();
                 string path = @"C:\Test\deadline.txt";
 
-                //using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-                //{
-                //    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Unicode))
-                //    {
-                //        foreach (var item in deadlines)
-                //        {
-                //            string fio = db.Users.Where(u => u.Id == item.UserId).FirstOrDefault().FIO;
-                //            sw.WriteLine($"User: {fio}   CreationDate: {item.CreationDate}  Deadline: {item.Deadline}");
-                //        }
-                //    }
-                //}
-
-                byte[] data = new byte[5000];
-                MemoryStream ms = new MemoryStream(data);
-                StreamWriter sw = new StreamWriter(ms);
-                StreamReader sr = new StreamReader(ms);
-
-                foreach (var item in links)
-                    if (item.Deadline < DateTime.Now)
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Unicode))
                     {
-                        string fio = db.Users.Where(u => u.Id == item.UserId).FirstOrDefault().FIO;
-                        sw.WriteLine($"User: {fio}   CreationDate: {item.CreationDate}  Deadline: {item.Deadline}");
+                        foreach (var item in deadlines)
+                        {
+                            string fio = db.Users.Where(u => u.Id == item.UserId).FirstOrDefault().FIO;
+                            sw.WriteLine($"User: {fio}   CreationDate: {item.CreationDate}  Deadline: {item.Deadline}");
+                        }
                     }
-                sw.Flush();
-                sw.Close();
-                //sr.Close();
+                }
 
-                return File(ms, "text/plain");
+                //byte[] data = new byte[5000];
+                //MemoryStream ms = new MemoryStream(data);
+                //StreamWriter sw = new StreamWriter(ms);
+
+                //foreach (var item in links)
+                //    if (item.Deadline < DateTime.Now)
+                //    {
+                //        string fio = db.Users.Where(u => u.Id == item.UserId).FirstOrDefault().FIO;
+                //        sw.WriteLine($"User: {fio}   CreationDate: {item.CreationDate}  Deadline: {item.Deadline}");
+                //    }
+                //sw.Flush();
+                //sw.Close();
+                ////sr.Close();
+                //string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                //FileStream file = new FileStream($@"{dir}\test.txt", FileMode.OpenOrCreate);
+                //ms.CopyTo(file);
+                ////return File(ms, "text/plain");
 
             }
-            //return RedirectToActionPermanent("Index", "UserBookLink");
+            return RedirectToActionPermanent("Index", "UserBookLink");
         }
 
         public bool HasDeadline(int id)
