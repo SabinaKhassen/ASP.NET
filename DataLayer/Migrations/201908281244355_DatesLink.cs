@@ -1,5 +1,5 @@
-namespace ASP.NET.Migrations
-{
+namespace DataLayer.Migrations
+{ 
     using System;
     using System.Data.Entity.Migrations;
     

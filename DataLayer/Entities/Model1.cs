@@ -1,4 +1,4 @@
-namespace ASP.NET
+namespace DataLayer
 {
     using System;
     using System.Data.Entity;

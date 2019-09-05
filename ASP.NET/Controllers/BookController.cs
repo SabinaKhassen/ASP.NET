@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using BussinessLayer.BussinessObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +10,22 @@ namespace ASP.NET.Controllers
 {
     public class BookController : Controller
     {
+        private readonly IMapper mapper;
         // GET: Book
+
+        public BookController(IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
+
         public ActionResult Index()
         {
-            List<Books> books;
-            using (Model1 db = new Model1())
-            {
-                books = db.Books.ToList();
-                ViewBag.Authors = db.Authors.ToList();
-            }
-            return View(books);
+            var books = DependencyResolver.Current.GetService<BookBO>();
+            var authors = DependencyResolver.Current.GetService<AuthorBO>();
+            ViewBag.Books = books.GetListBooks();
+            ViewBag.Authors = authors.GetListAuthors();
+
+            return View();
         }
 
         public ActionResult Edit(int id)

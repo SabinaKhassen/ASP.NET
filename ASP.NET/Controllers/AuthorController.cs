@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ASP.NET.Models;
+using AutoMapper;
+using BussinessLayer.BussinessObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,84 +11,74 @@ namespace ASP.NET.Controllers
 {
     public class AuthorController : Controller
     {
+        protected IMapper mapper;
         // GET: Author
+
+        public AuthorController(IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
+
         public ActionResult Index()
         {
-            List<Authors> authors;
-            List<Authors> authorsTop = new List<Authors>();
-            using (Model1 db = new NET.Model1())
+            AuthorBO authors = DependencyResolver.Current.GetService<AuthorBO>();
+            List<AuthorViewModel> authorsTop = new List<AuthorViewModel>();
+            BookBO books = DependencyResolver.Current.GetService<BookBO>();
+            var expensiveBooks = books.GetListBooks().Select(item => mapper.Map<BookViewModel>(item))
+                                .OrderByDescending(b => b.Price).ToList();
+            //expensiveBooks.ForEach(x => authorsTop.Add(db.Authors.Where(a => a.Id == x).FirstOrDefault()));
+            foreach (var item in expensiveBooks)
             {
-                authors = db.Authors.ToList();
-                var expensiveBooks = db.Books
-                    .OrderByDescending(b => b.Price).ToList();
-                //expensiveBooks.ForEach(x => authorsTop.Add(db.Authors.Where(a => a.Id == x).FirstOrDefault()));
-                foreach (var item in expensiveBooks)
-                {
-                    authorsTop.Add(db.Authors.Where(a => a.Id == item.AuthorId).FirstOrDefault());
-                }
-                ViewBag.AuthorsTop = authorsTop.Distinct().Take(5);
+                authorsTop.Add(authors.GetListAuthors().Select(a => mapper.Map<AuthorViewModel>(a))
+                    .Where(a => a.Id == item.AuthorId).FirstOrDefault());
             }
-            return View(authors);
+            ViewBag.Authors = authors.GetListAuthors().Select(item => mapper.Map<AuthorViewModel>(item)).ToList();
+            ViewBag.AuthorsTop = authorsTop.Distinct().Take(5);
+            
+            return View();
         }
 
         public ActionResult Edit(int id)
         {
-            Authors author;
-            using(Model1 db = new Model1())
+            AuthorBO authors = DependencyResolver.Current.GetService<AuthorBO>();
+            AuthorViewModel model = null;
+            if (id != 0)
             {
-                if (id != 0)
-                {
-                    ViewBag.Message = "Edit";
-                    author = db.Authors.Where(a => a.Id == id).FirstOrDefault();
-                }
-                else
-                {
-                    ViewBag.Message = "Create";
-                    author = null;
-                }
+                ViewBag.Message = "Edit";
+                model = mapper.Map<AuthorViewModel>(authors.GetListAuthorsById(id));
             }
-            return View(author);
+            else
+                ViewBag.Message = "Create";
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(Authors author)
+        public ActionResult Edit(AuthorViewModel author)
         {
-            using (Model1 db = new Model1())
-            {
-                Authors auth = db.Authors.Where(a => a.Id == author.Id).FirstOrDefault();
-                if (auth != null)
-                {
-                    auth.FirstName = author.FirstName;
-                    auth.LastName = author.LastName;
-                }
-                else
-                    db.Authors.Add(author);
-                db.SaveChanges();
-            }
+            var auths = DependencyResolver.Current.GetService<AuthorBO>();
+            var auth = mapper.Map<AuthorBO>(author);
+            auth.Save();
+
             return RedirectToActionPermanent("Index", "Author");
         }
 
         public ActionResult Delete(int id)
         {
-            Authors author;
-            using (Model1 db = new Model1())
-            {
-                author = db.Authors.Where(a => a.Id == id).FirstOrDefault();
-                db.Authors.Remove(author);
-                db.SaveChanges();
-            }
+            var author = DependencyResolver.Current.GetService<AuthorBO>().GetListAuthorsById(id);
+            author.Delete(id);
+
             return RedirectToActionPermanent("Index", "Author");
         }
 
         public ActionResult _MyPartialView()
         {
-            using (Model1 db = new NET.Model1())
-            {
-                var expensiveBooks = db.Books
-                    .OrderByDescending(b => b.Price).ToList();
-                ViewBag.ExpBooks = expensiveBooks;
-                ViewBag.Authors = db.Authors.ToList();
-            }
+            var books = DependencyResolver.Current.GetService<BookBO>();
+            var authors = DependencyResolver.Current.GetService<AuthorBO>();
+            var expensiveBooks = books.GetListBooks().Select(item => mapper.Map<BookViewModel>(item))
+                                .OrderByDescending(b => b.Price).ToList();
+            ViewBag.ExpBooks = expensiveBooks;
+            ViewBag.Authors = authors.GetListAuthors();
+            
             return PartialView();
         }
     }

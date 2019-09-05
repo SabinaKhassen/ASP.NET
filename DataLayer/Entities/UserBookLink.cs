@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ASP.NET
+namespace DataLayer
 {
     public class UserBookLinks
     {

@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET", "ASP.NET\ASP.NET.csproj", "{D5DAF8D4-D107-4975-8A99-E33FA0A1F51C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{A3EB65BB-7C48-4484-80BC-3405A15CC83D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLayer", "BussinessLayer\BussinessLayer.csproj", "{DF019359-2F60-4E06-B622-8E4F7F43CAD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D5DAF8D4-D107-4975-8A99-E33FA0A1F51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5DAF8D4-D107-4975-8A99-E33FA0A1F51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5DAF8D4-D107-4975-8A99-E33FA0A1F51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3EB65BB-7C48-4484-80BC-3405A15CC83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3EB65BB-7C48-4484-80BC-3405A15CC83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3EB65BB-7C48-4484-80BC-3405A15CC83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3EB65BB-7C48-4484-80BC-3405A15CC83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF019359-2F60-4E06-B622-8E4F7F43CAD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF019359-2F60-4E06-B622-8E4F7F43CAD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF019359-2F60-4E06-B622-8E4F7F43CAD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF019359-2F60-4E06-B622-8E4F7F43CAD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
